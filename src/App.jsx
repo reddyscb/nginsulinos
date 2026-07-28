@@ -268,7 +268,7 @@ function Badge({ children, tone = "primary" }) {
   );
 }
 
-function Bar({ value, max, color = C.primary, height = 8 }) {
+function Meter({ value, max, color = C.primary, height = 8 }) {
   const w = Math.min(100, Math.round((value / max) * 100));
   return (
     <div style={{ background: C.grid, borderRadius: 99, height, width: "100%", overflow: "hidden" }}>
@@ -393,7 +393,7 @@ function OverviewTab() {
               </div>
             </div>
             <div style={{ fontSize: 11.5, color: C.sub, marginBottom: 4 }}>Monthly target progress — {pct(p.mtdVials, p.targetMonth)}%</div>
-            <Bar value={p.mtdVials} max={p.targetMonth} color={p.color} />
+            <Meter value={p.mtdVials} max={p.targetMonth} color={p.color} />
           </Card>
         ))}
       </div>
@@ -451,7 +451,7 @@ function ProductionTab() {
                 <span style={{ fontSize: 13, color: C.ink, fontWeight: 600 }}>{s.name}</span>
                 <span className="f-mono" style={{ fontSize: 12.5, color: C.sub }}>{s.output.toLocaleString()} / {s.target.toLocaleString()} vials</span>
               </div>
-              <Bar value={s.output} max={s.target} color={s.output >= s.target ? C.ok : plant.color} height={10} />
+              <Meter value={s.output} max={s.target} color={s.output >= s.target ? C.ok : plant.color} height={10} />
             </div>
           ))}
         </div>
@@ -466,7 +466,7 @@ function ProductionTab() {
               <Badge tone={e.status === "Running" || e.status === "Normal" ? "ok" : e.status.includes("Due") || e.status === "Under Load" ? "warn" : "danger"}>{e.status}</Badge>
             </div>
             <div className="flex items-center gap-2">
-              <Bar value={e.health} max={100} color={e.health > 85 ? C.ok : e.health > 65 ? C.warn : C.danger} />
+              <Meter value={e.health} max={100} color={e.health > 85 ? C.ok : e.health > 65 ? C.warn : C.danger} />
               <span className="f-mono" style={{ fontSize: 12, color: C.sub, width: 34 }}>{e.health}%</span>
             </div>
             <div style={{ fontSize: 11, color: C.faint, marginTop: 4 }}>{e.type}</div>
@@ -532,7 +532,7 @@ function FinancialTab() {
                 <span style={{ fontSize: 13, color: C.ink }}>{p.name.split("—")[0].trim()}</span>
                 <span className="f-mono" style={{ fontSize: 12.5, color: C.sub }}>${p.capexM}M</span>
               </div>
-              <Bar value={p.capexM} max={14} color={p.color} />
+              <Meter value={p.capexM} max={14} color={p.color} />
             </div>
           ))}
         </Card>
@@ -544,7 +544,7 @@ function FinancialTab() {
                 <span style={{ fontSize: 13, color: C.ink }}>{c.name}</span>
                 <span className="f-mono" style={{ fontSize: 12.5, color: C.sub }}>{c.pct}%</span>
               </div>
-              <Bar value={c.pct} max={40} color={C.accent} />
+              <Meter value={c.pct} max={40} color={C.accent} />
             </div>
           ))}
         </Card>
@@ -805,7 +805,7 @@ function ComplianceTab() {
                 <td style={{ padding: "10px 16px" }}><Badge tone={n.status === "Registered" ? "ok" : "warn"}>{n.status}</Badge></td>
                 <td style={{ padding: "10px 16px", width: 220 }}>
                   <div className="flex items-center gap-2">
-                    <Bar value={n.gmp} max={100} color={n.gmp > 90 ? C.ok : C.warn} />
+                    <Meter value={n.gmp} max={100} color={n.gmp > 90 ? C.ok : C.warn} />
                     <span className="f-mono" style={{ fontSize: 12, color: C.sub }}>{n.gmp}%</span>
                   </div>
                 </td>
